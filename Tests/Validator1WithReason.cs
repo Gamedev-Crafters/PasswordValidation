@@ -9,12 +9,13 @@ public class Validator1WithReason {
 	[Test]
 	public void GoodPassword() {
 		var sut = new PasswordValidator1();
-		Assert.IsTrue(sut.IsValid("Hola1234_"));
+		Assert.AreEqual(new string[]{},sut.FailureReasons("Hola1234_"));
 	}
 	
 	[Test]
 	public void LessThan8CharShouldGiveReason() {
 		var sut = new PasswordValidator1();
+        
 		Assert.AreEqual(new[]{"Too few chars"}, sut.FailureReasons("Hola123_"));
 	}
 

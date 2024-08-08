@@ -17,6 +17,9 @@ public class PasswordValidator1 {
 
 	public string[] FailureReasons(Password password)
 	{
-		return new[]{"Too few chars"};
+        var reasons = new List<string>();
+        if (password.IsShorterOrEqualTo(8))
+            reasons.Add("Too few chars");        
+		return reasons.ToArray();
 	}
 }
