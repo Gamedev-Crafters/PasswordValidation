@@ -1,14 +1,16 @@
+using PasswordValidationKata;
+
 namespace Tests;
 
 public class PasswordValidator3 {
-    public bool IsValid(string password) {
-        if (password.Length <= 16)
+    public bool IsValid(Password password) {
+        if (password.IsShorterOrEqualTo(16))
             return false;
-        if (password.ToLower() == password)
+        if (password.DoesNotLowerCaseLetters())
             return false;
-        if (password.ToUpper() == password)
+        if (password.DoesNotUpperCaseLetters())
             return false;
-		if (!password.Contains('_'))
+		if (password.DoesNotUnderscore())
 			return false;
         return true;
     }
