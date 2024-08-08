@@ -1,14 +1,14 @@
 ﻿namespace PasswordValidationKata;
 
+public enum FailureReason {
+    TooShort,
+    NoUppercase,
+    NoLowercase,
+    NoNumber,
+    NoUnderscore
+}
 public class PasswordValidator1 {
-    public enum FailureReason {
-        TooShort,
-        NoUppercase,
-        NoLowercase,
-        NoNumber,
-        NoUnderscore
-    }
-    
+
 	public bool IsValid(Password password) {
 		if (password.IsShorterOrEqualTo(8))
 			return false;
@@ -23,11 +23,11 @@ public class PasswordValidator1 {
 		return true;
 	}
 
-	public string[] FailureReasons(Password password)
+	public IEnumerable<FailureReason> FailureReasons(Password password)
 	{
-        var reasons = new List<string>();
+        var reasons = new List<FailureReason>();
         if (password.IsShorterOrEqualTo(8))
-            reasons.Add("Too few chars");        
-		return reasons.ToArray();
+            reasons.Add(FailureReason.TooShort);
+		return reasons.AsEnumerable();
 	}
 }
