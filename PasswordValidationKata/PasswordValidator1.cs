@@ -30,6 +30,12 @@ public class PasswordValidator1 {
             reasons.Add(FailureReason.TooShort);
         if (password.DoesNotUpperCaseLetters())
 	        reasons.Add(FailureReason.NoUppercase);
+        if (password.DoesNotLowerCaseLetters())
+	        reasons.Add(FailureReason.NoLowercase);
+        if (password.DoesNotNumber())
+	        reasons.Add(FailureReason.NoNumber);
+        if (password.DoesNotUnderscore())
+	        reasons.Add(FailureReason.NoUnderscore);
 		return reasons.AsEnumerable();
 	}
 }

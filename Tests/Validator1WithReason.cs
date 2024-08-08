@@ -26,28 +26,24 @@ public class Validator1WithReason {
 		Assert.AreEqual(new[]{FailureReason.NoUppercase}, sut.FailureReasons("hola1234_"));
 	}
 
-	// [Test]
-	// public void NoUppercaseShouldFail() {
-	// 	var sut = new PasswordValidator1();
-	// 	Assert.IsFalse(sut.IsValid("hola1234_"));
-	// }
- //
- //    [Test]
- //    public void NoLowercaseShouldFail() {
- //        var sut = new PasswordValidator1();
- //        Assert.IsFalse(sut.IsValid("HOLA1234_"));
- //    }
- //
-	// [Test]
-	// public void NoNumberShouldFail() {
-	// 	var sut = new PasswordValidator1();
-	// 	Assert.IsFalse(sut.IsValid("Holaholahola_"));
-	// }
- //
- //    [Test]
- //    public void NoUnderscoreShouldFail()
- //    {
- //        var sut = new PasswordValidator1();
- //        Assert.IsFalse(sut.IsValid("Hola12347298734289374238947"));
-	// }
+	[Test]
+	public void NoLowercaseGiveReason() {
+		var sut = new PasswordValidator1();
+
+		Assert.AreEqual(new[]{FailureReason.NoLowercase}, sut.FailureReasons("HOLA1234_"));
+	}
+
+	[Test]
+	public void NoNumbersGiveReason() {
+		var sut = new PasswordValidator1();
+
+		Assert.AreEqual(new[]{FailureReason.NoNumber}, sut.FailureReasons("HOLAasdpfkoj_"));
+	}
+
+	[Test]
+	public void NoUnderscoreReason() {
+		var sut = new PasswordValidator1();
+
+		Assert.AreEqual(new[]{FailureReason.NoUnderscore}, sut.FailureReasons("HOLAasdp123"));
+	}
 }
