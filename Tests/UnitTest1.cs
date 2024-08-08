@@ -20,6 +20,12 @@ public class Tests {
 		var sut = new PasswordValidator();
 		Assert.IsFalse(sut.IsValid("hola1234_"));
 	}
+    
+    [Test]
+    public void NoLowercaseShouldFail() {
+        var sut = new PasswordValidator();
+        Assert.IsFalse(sut.IsValid("HOLA1234_"));
+    }
 	
 	[Test]
 	public void NoNumberShouldFail() {
@@ -33,6 +39,8 @@ public class Tests {
         var sut = new PasswordValidator();
         Assert.IsFalse(sut.IsValid("Hola12347298734289374238947"));
     }
+    
+    
 }
 
 public class PasswordValidator {
@@ -41,10 +49,12 @@ public class PasswordValidator {
 			return false;
 		if (password.ToLower() == password)
 			return false;
-		if (!password.Any(Char.IsNumber))
+        if (password.ToUpper() == password)
+            return false;
+        if (!password.Any(Char.IsNumber))
 			return false;
         if (!password.Contains('_')) 
             return false;
-		return true;
-	}
+        return true;
+    }
 }
