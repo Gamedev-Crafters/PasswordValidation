@@ -1,6 +1,14 @@
 ﻿namespace PasswordValidationKata;
 
 public class PasswordValidator1 {
+    public enum FailureReason {
+        TooShort,
+        NoUppercase,
+        NoLowercase,
+        NoNumber,
+        NoUnderscore
+    }
+    
 	public bool IsValid(Password password) {
 		if (password.IsShorterOrEqualTo(8))
 			return false;
