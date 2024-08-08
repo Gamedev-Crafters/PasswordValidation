@@ -14,4 +14,9 @@ public class PasswordValidator1 {
 			return false;
 		return true;
 	}
+
+	public string[] FailureReasons(Password password)
+	{
+		return new[]{"Too few chars"};
+	}
 }
