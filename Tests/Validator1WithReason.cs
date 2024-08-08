@@ -19,6 +19,13 @@ public class Validator1WithReason {
 		Assert.AreEqual(new[]{FailureReason.TooShort}, sut.FailureReasons("Hola123_"));
 	}
 
+	[Test]
+	public void NoUppercaseGiveReason() {
+		var sut = new PasswordValidator1();
+
+		Assert.AreEqual(new[]{FailureReason.NoUppercase}, sut.FailureReasons("hola1234_"));
+	}
+
 	// [Test]
 	// public void NoUppercaseShouldFail() {
 	// 	var sut = new PasswordValidator1();

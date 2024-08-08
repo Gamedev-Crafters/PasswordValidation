@@ -28,6 +28,8 @@ public class PasswordValidator1 {
         var reasons = new List<FailureReason>();
         if (password.IsShorterOrEqualTo(8))
             reasons.Add(FailureReason.TooShort);
+        if (password.DoesNotUpperCaseLetters())
+	        reasons.Add(FailureReason.NoUppercase);
 		return reasons.AsEnumerable();
 	}
 }
