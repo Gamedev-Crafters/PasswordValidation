@@ -7,8 +7,9 @@ public class Tests {
 	[Test]
 	public void GoodPassword() {
 		var sut = new PasswordValidator();
-		Assert.IsTrue(sut.IsValid("Hola123_"));
+		Assert.IsTrue(sut.IsValid("Hola1234_"));
 	}
+	
 }
 
 public class PasswordValidator {
