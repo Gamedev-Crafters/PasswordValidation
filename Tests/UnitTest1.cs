@@ -20,6 +20,12 @@ public class Tests {
 		var sut = new PasswordValidator();
 		Assert.IsFalse(sut.IsValid("hola1234_"));
 	}
+	
+	[Test]
+	public void NoNumberShouldFail() {
+		var sut = new PasswordValidator();
+		Assert.IsFalse(sut.IsValid("Holaholahola_"));
+	}
 }
 
 public class PasswordValidator {
@@ -27,6 +33,8 @@ public class PasswordValidator {
 		if (password.Length <= 8)
 			return false;
 		if (password.ToLower() == password)
+			return false;
+		if (!password.Any(c => Char.IsNumber(c)))
 			return false;
 		return true;
 	}
