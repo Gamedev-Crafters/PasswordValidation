@@ -15,11 +15,18 @@ public class Tests {
 		Assert.IsFalse(sut.IsValid("Hola123_"));
 	}
 	
+	[Test]
+	public void NoUppercaseShouldFail() {
+		var sut = new PasswordValidator();
+		Assert.IsFalse(sut.IsValid("hola1234_"));
+	}
 }
 
 public class PasswordValidator {
 	public bool IsValid(string password) {
 		if (password.Length <= 8)
+			return false;
+		if (password.ToLower() == password)
 			return false;
 		return true;
 	}
