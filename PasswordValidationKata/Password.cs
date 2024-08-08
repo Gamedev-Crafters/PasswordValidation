@@ -31,4 +31,10 @@ public class Password {
     {
         return password.ToLower() == password;
     }
+
+    public static implicit operator Password(string password) =>
+        new(password);
+
+    public override string ToString() =>
+        password;
 }

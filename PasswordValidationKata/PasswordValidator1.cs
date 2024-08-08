@@ -14,8 +14,4 @@ public class PasswordValidator1 {
 			return false;
 		return true;
 	}
-
-	public bool IsValid(string password) {
-		return IsValid(new Password(password));
-	}
 }
