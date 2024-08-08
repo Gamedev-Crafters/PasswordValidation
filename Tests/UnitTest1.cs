@@ -5,7 +5,14 @@ public class Tests {
 	public void Setup() { }
 
 	[Test]
-	public void Test1() {
-		Assert.Pass();
+	public void GoodPassword() {
+		var sut = new PasswordValidator();
+		Assert.IsTrue(sut.IsValid("Hola123_"));
+	}
+}
+
+public class PasswordValidator {
+	public bool IsValid(string password) {
+		return true;
 	}
 }
