@@ -1,17 +1,21 @@
 ﻿namespace PasswordValidationKata;
 
 public class PasswordValidator1 {
-	public bool IsValid(string password) {
-		if (Password.IsShorterOrEqualTo(password, 8))
+	public bool IsValid(Password password) {
+		if (password.IsShorterOrEqualTo(8))
 			return false;
-		if (Password.DoesNotUpperCaseLetters(password))
+		if (password.DoesNotUpperCaseLetters())
 			return false;
-		if (Password.DoesNotLowerCaseLetters(password))
+		if (password.DoesNotLowerCaseLetters())
 			return false;
-		if (Password.DoesNotNumber(password))
+		if (password.DoesNotNumber())
 			return false;
-		if (Password.DoesNotUnderscore(password))
+		if (password.DoesNotUnderscore())
 			return false;
 		return true;
+	}
+
+	public bool IsValid(string password) {
+		return IsValid(new Password(password));
 	}
 }

@@ -1,28 +1,33 @@
 ﻿namespace PasswordValidationKata;
 
-public class Password
-{
-    public static bool IsShorterOrEqualTo(string password, int length)
+public class Password {
+    private string password;
+
+    public Password(string password) {
+        this.password = password;
+    }
+
+    public bool IsShorterOrEqualTo(int length)
     {
         return password.Length <= length;
     }
 
-    public static bool DoesNotUnderscore(string password)
+    public bool DoesNotUnderscore()
     {
         return !password.Contains('_');
     }
 
-    public static bool DoesNotNumber(string password)
+    public bool DoesNotNumber()
     {
         return !password.Any(Char.IsNumber);
     }
 
-    public static bool DoesNotLowerCaseLetters(string password)
+    public bool DoesNotLowerCaseLetters()
     {
         return password.ToUpper() == password;
     }
 
-    public static bool DoesNotUpperCaseLetters(string password)
+    public bool DoesNotUpperCaseLetters()
     {
         return password.ToLower() == password;
     }
