@@ -26,6 +26,13 @@ public class Tests {
 		var sut = new PasswordValidator();
 		Assert.IsFalse(sut.IsValid("Holaholahola_"));
 	}
+
+    [Test]
+    public void NoUnderscoreShouldFail()
+    {
+        var sut = new PasswordValidator();
+        Assert.IsFalse(sut.IsValid("Hola12347298734289374238947"));
+    }
 }
 
 public class PasswordValidator {
@@ -34,8 +41,10 @@ public class PasswordValidator {
 			return false;
 		if (password.ToLower() == password)
 			return false;
-		if (!password.Any(c => Char.IsNumber(c)))
+		if (!password.Any(Char.IsNumber))
 			return false;
+        if (!password.Contains('_')) 
+            return false;
 		return true;
 	}
 }
