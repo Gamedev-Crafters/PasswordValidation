@@ -4,7 +4,7 @@ public class PasswordValidator1 {
 	public bool IsValid(string password) {
 		if (password.Length <= 8)
 			return false;
-		if (password.ToLower() == password)
+		if (DoesNotUpperCaseLetters(password))
 			return false;
 		if (password.ToUpper() == password)
 			return false;
@@ -13,5 +13,10 @@ public class PasswordValidator1 {
 		if (!password.Contains('_'))
 			return false;
 		return true;
+	}
+
+	private static bool DoesNotUpperCaseLetters(string password)
+	{
+		return password.ToLower() == password;
 	}
 }
