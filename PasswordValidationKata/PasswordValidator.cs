@@ -30,22 +30,16 @@ public class Result : IEnumerable<FailureReason>
 	IEnumerator IEnumerable.GetEnumerator() {
 		return GetEnumerator();
 	}
+
+	public bool IsValid(){
+		return failures.Count()==0;
+	}
 }
 
 public class PasswordValidator {
 
 	public bool IsValid(Password password) {
-		if (password.IsShorterOrEqualTo(8))
-			return false;
-		if (password.DoesNotUpperCaseLetters())
-			return false;
-		if (password.DoesNotLowerCaseLetters())
-			return false;
-		if (password.DoesNotNumber())
-			return false;
-		if (password.DoesNotUnderscore())
-			return false;
-		return true;
+		return Validate(password).IsValid();
 	}
 
 	public Result Validate(Password password)
