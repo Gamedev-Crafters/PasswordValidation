@@ -23,7 +23,10 @@ public class Result : IEnumerable<FailureReason>
         return GetEnumerator();
     }
 
-    public bool IsValid(){
-        return !failures.Any();
+    public bool IsValid(bool strict)
+    {
+        return strict ? 
+            !failures.Any() : 
+            failures.Count() <= 1;
     }
 }

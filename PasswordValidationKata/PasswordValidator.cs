@@ -8,10 +8,16 @@ public enum FailureReason {
     NoUnderscore
 }
 
-public class PasswordValidator {
+public class PasswordValidator
+{
+	private bool strict;
+	public PasswordValidator(bool strict = true)
+	{
+		this.strict = strict;
+	}
 
 	public bool IsValid(Password password) {
-		return Validate(password).IsValid();
+		return Validate(password).IsValid(strict);
 	}
 
 	public Result Validate(Password password)
