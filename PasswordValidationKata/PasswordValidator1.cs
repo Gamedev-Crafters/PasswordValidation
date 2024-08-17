@@ -7,6 +7,17 @@ public enum FailureReason {
     NoNumber,
     NoUnderscore
 }
+
+public class Result
+{
+	private IEnumerable<FailureReason> failures;
+
+	public bool Contains(params FailureReason[] failures)
+	{
+		return failures.All(fail => this.failures.Contains(fail));
+	}	
+}
+
 public class PasswordValidator1 {
 
 	public bool IsValid(Password password) {
