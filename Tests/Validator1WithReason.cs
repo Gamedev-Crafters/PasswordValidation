@@ -46,4 +46,12 @@ public class Validator1WithReason {
 
 		Assert.AreEqual(new[]{FailureReason.NoUnderscore}, sut.FailureReasons("HOLAasdp123"));
 	}
+
+	[Test]
+	public void MultipleReasons()
+	{
+		var sut = new PasswordValidator1();
+		Assert.AreEqual(new[] { FailureReason.TooShort, FailureReason.NoNumber, FailureReason.NoUnderscore },
+			sut.FailureReasons("HOLAasdp"));
+	}
 }
