@@ -1,4 +1,6 @@
-﻿namespace PasswordValidationKata;
+﻿using System.Collections;
+
+namespace PasswordValidationKata;
 
 public enum FailureReason {
     TooShort,
@@ -8,14 +10,26 @@ public enum FailureReason {
     NoUnderscore
 }
 
-public class Result
+public class Result : IEnumerable<FailureReason>
 {
 	private IEnumerable<FailureReason> failures;
+
+	public Result(IEnumerable<FailureReason> failures) {
+		this.failures = failures;
+	}
 
 	public bool Contains(params FailureReason[] failures)
 	{
 		return failures.All(fail => this.failures.Contains(fail));
-	}	
+	}
+
+	public IEnumerator<FailureReason> GetEnumerator() {
+		return failures.GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator() {
+		return GetEnumerator();
+	}
 }
 
 public class PasswordValidator1 {
@@ -34,6 +48,7 @@ public class PasswordValidator1 {
 		return true;
 	}
 
+	[Obsolete("This method is obsolete and will be removed in future versions.")]
 	public IEnumerable<FailureReason> FailureReasons(Password password)
 	{
         var reasons = new List<FailureReason>();
@@ -48,5 +63,9 @@ public class PasswordValidator1 {
         if (password.DoesNotUnderscore())
 	        reasons.Add(FailureReason.NoUnderscore);
 		return reasons.AsEnumerable();
+	}
+
+	public Result Validate(Password password) {
+		return new Result(FailureReasons(password));
 	}
 }
