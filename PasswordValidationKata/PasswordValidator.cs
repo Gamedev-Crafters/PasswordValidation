@@ -32,7 +32,7 @@ public class Result : IEnumerable<FailureReason>
 	}
 }
 
-public class PasswordValidator1 {
+public class PasswordValidator {
 
 	public bool IsValid(Password password) {
 		if (password.IsShorterOrEqualTo(8))
