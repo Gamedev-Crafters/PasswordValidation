@@ -10,42 +10,42 @@ public class Validator1WithReason {
 	[Test]
 	public void GoodPassword() {
 		var sut = new PasswordValidator1();
-		Assert.AreEqual(new FailureReason[]{},sut.FailureReasons("Hola1234_"));
+		Assert.AreEqual(new FailureReason[]{},sut.Validate("Hola1234_"));
 	}
 	
 	[Test]
 	public void LessThan8CharShouldGiveReason() {
 		var sut = new PasswordValidator1();
         
-		Assert.AreEqual(new[]{TooShort}, sut.FailureReasons("Hola123_"));
+		Assert.AreEqual(new[]{TooShort}, sut.Validate("Hola123_"));
 	}
 
 	[Test]
 	public void NoUppercaseGiveReason() {
 		var sut = new PasswordValidator1();
 
-		Assert.AreEqual(new[]{NoUppercase}, sut.FailureReasons("hola1234_"));
+		Assert.AreEqual(new[]{NoUppercase}, sut.Validate("hola1234_"));
 	}
 
 	[Test]
 	public void NoLowercaseGiveReason() {
 		var sut = new PasswordValidator1();
 
-		Assert.AreEqual(new[]{NoLowercase}, sut.FailureReasons("HOLA1234_"));
+		Assert.AreEqual(new[]{NoLowercase}, sut.Validate("HOLA1234_"));
 	}
 
 	[Test]
 	public void NoNumbersGiveReason() {
 		var sut = new PasswordValidator1();
 
-		Assert.AreEqual(new[]{NoNumber}, sut.FailureReasons("HOLAasdpfkoj_"));
+		Assert.AreEqual(new[]{NoNumber}, sut.Validate("HOLAasdpfkoj_"));
 	}
 
 	[Test]
 	public void NoUnderscoreReason() {
 		var sut = new PasswordValidator1();
 
-		Assert.AreEqual(new[]{NoUnderscore}, sut.FailureReasons("HOLAasdp123"));
+		Assert.AreEqual(new[]{NoUnderscore}, sut.Validate("HOLAasdp123"));
 	}
 
 	[Test]
@@ -53,25 +53,18 @@ public class Validator1WithReason {
 	{
 		var sut = new PasswordValidator1();
 		Assert.AreEqual(new[] { TooShort, NoNumber, NoUnderscore },
-			sut.FailureReasons("HOLAasdp"));
+			sut.Validate("HOLAasdp"));
 	}
+
 	[Test]
 	public void MultipleReasonsUnordered()
 	{
 		var sut = new PasswordValidator1();
 
-		var asdfij = sut.FailureReasons("HOLAasdp");
-
-		Assert.AreEqual(new[] { TooShort, NoNumber, NoUnderscore },
-			asdfij);
-	}
-	[Test]
-	public void dfasluiojkfhdasop()
-	{
-		var sut = new PasswordValidator1();
-
 		var result = sut.Validate("HOLAasdp");
 
-		Assert.IsTrue(result.Contains(TooShort, NoNumber, NoUnderscore));
+		Assert.IsTrue(result.Contains(TooShort, NoUnderscore, NoNumber));
 	}
 }
+
+
