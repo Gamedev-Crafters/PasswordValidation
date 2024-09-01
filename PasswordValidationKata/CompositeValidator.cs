@@ -11,12 +11,6 @@ public class CompositeValidator : PassValidator
     
     public Result Validate(Password password)
     {
-        var reasons = new List<FailureReason>();
-        foreach (var validator in validators)
-        {
-            var result = validator.Validate(password);
-            reasons.AddRange(result);
-        }
-        return new Result(reasons.AsEnumerable());
+        return new Result(validators.SelectMany(validator => validator.Validate(password)));
     }
 }
